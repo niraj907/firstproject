@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  Services
+{% endblock title %}
+
+{% block content %}
+<section class="services-section">
+  <div class="container">
+    <h1 class="section-title text-blue-800">Our Services</h1>
+    <p class="section-description">
+      We offer a wide range of professional services designed to help your business grow and succeed.
+    </p>
+
+    <div class="services-grid">
+      {% for n in servicesData %}
+        <div class="service-card">
+          <h1 class="text-sky-500">{{ n.service_icon }}</h1>
+          <h2>{{ n.service_title }}</h2>
+          <p class="bg-amber-200">{{ n.service_description | capfirst}}</p>
+        </div>
+      {% empty %}
+        <h2>No services found</h2>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+{% endblock %}

@@ -1,0 +1,88 @@
+{% load static tailwind_tags %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    {% tailwind_css %}
+  <title>
+      {% block title %}
+      {% endblock %}
+    </title>
+ 
+  <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+
+</head>
+
+<body>
+  <nav class="navbar">
+    <div class="nav-container">
+      <a  href="{% url 'index' %}" class="nav-logo">NC</a >
+      <ul class="nav-links" id="navLinks">
+        <li><a  href="{% url 'index' %}">Home</a></li>
+        <li><a  href="{% url 'about' %}">About</a></li>
+        <li><a  href="{% url 'services' %}">Services</a></li>
+        <li><a href="{% url 'contact' %}">Contact</a></li>
+        <li><a href="{% url 'calculator' %}">calculator</a></li>
+        <li><a href="{% url 'blog' %}">Blog</a></li>
+
+         {% if user.is_authenticated %}
+        <li><a href="{% url 'logout' %}">Logout</a></li>
+            {% else %}
+        <li><a href="{% url 'login' %}">Login</a></li>
+          {% endif %}
+      </ul>
+      <div class="hamburger" id="hamburger">&#9776;</div>
+    </div>
+  </nav>
+   {% block content %}
+  {% endblock %}
+
+<footer class="footer">
+  <div class="footer-container">
+    <div class="footer-about">
+      <h3>About Me</h3>
+      <p>I'm Niraj Chaudhary, a frontend developer passionate about building user-friendly websites.</p>
+    </div>
+    <div class="footer-links">
+      <h3>Quick Links</h3>
+      <ul>
+        <li><a href="{% url 'index' %}">Home</a></li>
+        <li><a href="/about/">About</a></li>
+        <li><a href="/services/">Services</a></li>
+        <li><a href="/contact/">Contact</a></li>
+        <li><a href="/calculator/">calculator</a></li>
+      </ul>
+    </div>
+
+    <div class="footer-contact">
+      <h3>Contact</h3>
+      <p>Email: <a href="mailto:chaudhariiiniraj@gmail.com">chaudhariiiniraj@gmail.com</a></p>
+      <p>Phone: <a href="tel:+9779818272358">+977-9818272358</a></p>
+    </div>
+  </div>
+
+  <div class="footer-bottom">
+    <p>&copy; 2025 Niraj Chaudhary. All rights reserved.</p>
+  </div>
+</footer>
+
+  
+  <script src="{% static 'js/script.js' %}"></script>
+<!-- Include SweetAlert2 CDN -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+  {% if messages %}
+    {% for message in messages %}
+      Swal.fire({
+        title: "{{ message.tags|capfirst }}!",
+        text: "{{ message }}",
+        icon: "{% if message.tags == 'success' %}success{% elif message.tags == 'error' %}error{% else %}info{% endif %}",
+        confirmButtonText: 'OK'
+      });
+    {% endfor %}
+  {% endif %}
+</script>
+</body>
+</html>  

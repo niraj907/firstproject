@@ -1,0 +1,213 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  News Blogs
+{% endblock %}
+
+{% block content %}
+
+<style>
+  /* style.css */
+body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+.blog-section{
+  padding: 15px 0px;
+}
+
+.container {
+  width: 90%;
+  max-width: 1000px;
+  margin: auto;
+  padding: 20px;
+
+}
+
+.blog-title {
+  text-align: center;
+  font-size: 32px;
+  margin-bottom: 30px;
+}
+
+.news-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  justify-content: center;
+}
+
+.news-card {
+  width: 300px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 10px rgba(0,0,0,0.1);
+  background-color: #fff;
+}
+
+.news-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.news-card-title {
+  font-size: 20px;
+  font-weight: bold;
+  margin: 15px;
+  color: #222;
+  cursor: pointer;
+  text-decoration: none; 
+  display: block;
+}
+
+.news-card-title:hover {
+color: #A5D5DA;
+ opacity: 0.8; 
+}
+
+.news-card-desc {
+  font-size: 14px;
+  margin: 0 15px 15px;
+  color: #555;
+}
+
+.published-date {
+  font-size: 13px;
+  color: #888;
+  margin-left: 15px;
+}
+
+.search {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 30px 0;
+}
+
+.search_input {
+  padding: 10px 15px;
+  width: 250px;
+  font-size: 14px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  outline: none;
+}
+
+.search_input:focus {
+  border-color: #00aaff;
+  box-shadow: 0 0 5px rgba(0, 170, 255, 0.3);
+}
+
+.search_btn {
+  padding: 10px 20px;
+  font-size: 14px;
+  background-color: #00aaff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.search_btn:hover {
+  background-color: #008ecc;
+}
+
+
+.center {
+  text-align: center;
+}
+
+.pagination {
+  display: inline-block;
+}
+
+.pagination a {
+  color: black;
+  float: left;
+  padding: 8px 16px;
+  text-decoration: none;
+  transition: background-color .3s;
+  border: 1px solid #ddd;
+  margin: 0 4px;
+}
+
+.pagination a.active {
+  background-color: #00aaff;
+  color: white;
+  border: 1px solid #4CAF50;
+}
+
+.pagination a:hover:not(.active) {background-color: #ddd;}
+.pagination a.disabled {
+  background-color: #eee;
+  color: #999;
+  cursor: not-allowed;
+}
+
+</style>
+
+<section class="blog-section">
+  <div class="container">
+    <h2 class="blog-title text-red-700">Latest News Blogs</h2>
+
+    <form method="get" action="{% url 'blog' %}" class="search">
+<input type="search" name="newsname" value="{{ newsname }}" placeholder="Search News..." class="search_input">
+
+  <button type="submit" class="search_btn">Search</button>
+</form>
+
+   
+    <div class="news-grid">
+      {% for news in page_obj %}
+        <div class="news-card">
+          <img src="{{ news.news_image.url }}" alt="{{ news.news_title }}">
+<a href="{% url 'newDeatils' news.news_slug %}" class="news-card-title">{{ news.news_title }}</a>
+
+<p class="published-date">{{ news.published_date|date:"F d, Y, h:i a" }}</p>
+
+          <div class="news-card-desc">{{ news.news_decs|safe|truncatewords:20 }}</div>
+        </div>
+      {% empty %}
+      <h2>No news found</h2> 
+      {% endfor %}
+    </div>
+  </div>
+
+<div class="center">
+  <div class="pagination">
+    <!-- Prev Button -->
+    {% if page_obj.has_previous %}
+      <a href="?{% if newsname %}newsname={{ newsname }}&{% endif %}page={{ page_obj.previous_page_number }}">Prev</a>
+    {% else %}
+      <a class="disabled" style="pointer-events: none; opacity: 0.5;">Prev</a>
+    {% endif %}
+
+    <!-- Page Numbers -->
+    {% for num in page_obj.paginator.page_range %}
+      {% if page_obj.number == num %}
+        <a href="#" class="active">{{ num }}</a>
+      {% else %}
+        <a href="?{% if newsname %}newsname={{ newsname }}&{% endif %}page={{ num }}">{{ num }}</a>
+      {% endif %}
+    {% endfor %}
+
+    <!-- Next Button -->
+    {% if page_obj.has_next %}
+      <a href="?{% if newsname %}newsname={{ newsname }}&{% endif %}page={{ page_obj.next_page_number }}">Next</a>
+    {% else %}
+      <a class="disabled" style="pointer-events: none; opacity: 0.5;">Next</a>
+    {% endif %}
+  </div>
+</div>
+
+
+
+</section>
+{% endblock %}

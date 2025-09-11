@@ -1,0 +1,90 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block title %}
+  Marksheet
+{% endblock title %}
+
+{% block content %}
+<section class="contact-section">
+  <div class="calculator-container">
+    <h1 class="section-title">Student Marksheet</h1>
+
+    <!-- ✅ Added id to form -->
+    <form method="POST" id="marksheetForm">
+      {% csrf_token %}
+      <div class="form-group">
+        <label for="subject1">Subject 1:</label>
+        <input type="text" id="subject1" name="subject1" required />
+      </div>
+      <div class="form-group">
+        <label for="subject2">Subject 2:</label>
+        <input type="text" id="subject2" name="subject2" required />
+      </div>
+      <div class="form-group">
+        <label for="subject3">Subject 3:</label>
+        <input type="text" id="subject3" name="subject3" required />
+      </div>
+      <div class="form-group">
+        <label for="subject4">Subject 4:</label>
+        <input type="text" id="subject4" name="subject4" required />
+      </div>
+      <div class="form-group">
+        <label for="subject5">Subject 5:</label>
+        <input type="text" id="subject5" name="subject5" required />
+      </div>
+
+      <button type="submit" class="btn-calculate">Marksheet</button>
+
+      {% if total %}
+      <div class="form-group">
+        <label>Total</label>
+        <input type="text" value="{{ total }}" readonly />
+      </div>
+      <div class="form-group">
+        <label>Percentage</label>
+        <input type="text" value="{{ percentage }}%" readonly />
+      </div>
+      <div class="form-group">
+        <label>Division</label>
+        <!-- ✅ Optional: Change input color if result is "Fail" -->
+        <input type="text" value="{{ result }}" readonly
+       {% if result == "Fail" %} style="background-color: red; color: white;" {% endif %} />
+
+      </div>
+      {% endif %}
+    </form>
+  </div>
+</section>
+
+<!-- ✅ Load SweetAlert2 -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<!-- ✅ Validation Script -->
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('marksheetForm');
+
+    form.addEventListener('submit', function (e) {
+      const subjectIds = ['subject1', 'subject2', 'subject3', 'subject4', 'subject5'];
+
+      for (let i = 0; i < subjectIds.length; i++) {
+        const input = document.getElementById(subjectIds[i]).value.trim();
+
+        // If input is empty or not a valid number
+        if (input === "" || isNaN(input)) {
+          e.preventDefault(); // Stop form from submitting
+
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: "You cannot enter letters or symbols. Please enter numbers only in all subjects.",
+          });
+
+          return; // Exit after first invalid input
+        }
+      }
+    });
+  });
+</script>
+{% endblock %}
