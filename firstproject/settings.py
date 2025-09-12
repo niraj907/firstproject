@@ -24,7 +24,8 @@ SECRET_KEY = 'django-insecure-xw&(plhzn(nammcrl@0e(!+%!o5$=^kk!n9yio_8%*h4-9w+)g
 DEBUG = False
 
 # Hosts allowed to serve your app
-ALLOWED_HOSTS = ["firstProject.onrender.com"]
+ALLOWED_HOSTS = ["127.0.0.1", "localhost"]
+
 
 # -----------------------------
 # Installed applications
