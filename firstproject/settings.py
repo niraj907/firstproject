@@ -102,8 +102,12 @@ TAILWIND_APP_NAME = 'theme'
 # -----------------------------
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'firstprojectdb',
+        'USER': 'myuser',        # PostgreSQL username
+        'PASSWORD': 'postgres',# PostgreSQL password
+        'HOST': 'localhost',           # Usually 'localhost'
+        'PORT': '5432',   
     }
 }
 
