@@ -24,8 +24,12 @@ SECRET_KEY = 'django-insecure-xw&(plhzn(nammcrl@0e(!+%!o5$=^kk!n9yio_8%*h4-9w+)g
 DEBUG = False
 
 # Hosts allowed to serve your app
-ALLOWED_HOSTS = ["127.0.0.1", "localhost", "firstproject-po3l.onrender.com"]
-
+ALLOWED_HOSTS = [
+    "127.0.0.1",
+    "localhost",
+    "firstproject-po3l.onrender.com",   # old one
+    "firstproject-1-f58i.onrender.com", # new one (your live URL)
+]
 
 
 # -----------------------------
