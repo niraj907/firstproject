@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/5.0/topics/settings/
 
 from pathlib import Path
 import os
-
+import dj_database_url
 # -----------------------------
 # Base directory
 # -----------------------------
@@ -100,15 +100,23 @@ TAILWIND_APP_NAME = 'theme'
 # -----------------------------
 # Database
 # -----------------------------
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'firstprojectdb',
+#         'USER': 'myuser',        # PostgreSQL username
+#         'PASSWORD': 'postgres',# PostgreSQL password
+#         'HOST': 'localhost',           # Usually 'localhost'
+#         'PORT': '5432',   
+#     }
+    
+# }
+
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'firstprojectdb',
-        'USER': 'myuser',        # PostgreSQL username
-        'PASSWORD': 'postgres',# PostgreSQL password
-        'HOST': 'localhost',           # Usually 'localhost'
-        'PORT': '5432',   
-    }
+    "default": dj_database_url.config(
+        default="postgresql://myuser:postgres@localhost:5432/firstprojectdb"
+    )
 }
 
 # -----------------------------
