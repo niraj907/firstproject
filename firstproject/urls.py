@@ -14,7 +14,6 @@ urlpatterns = [
      path('contact/', contact, name='contact'), 
      path('saveenquiry/', saveEnquiry, name='saveenquiry'),
      path('calculator/', calculator, name='calculator'), 
-     path('', include('news.urls')),
      path('submitForm/', submitForm, name='submitForm'), 
      path('marksheet/', marksheet), 
      path('', index, name='index'),
