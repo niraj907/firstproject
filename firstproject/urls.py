@@ -8,7 +8,6 @@ from django.conf.urls.static import static
 urlpatterns = [
      path('admin/', admin.site.urls),
      path('about/', about, name='about'), 
-     path('services/', services, name='services'), 
      path('login/', login_view, name='login'),
      path('register/', register_view, name='register'),
      path('logout/', logout_view, name='logout'), 
@@ -21,6 +20,9 @@ urlpatterns = [
      path('', index, name='index'),
      path('test-email/', test_email, name='test_email'),
      path("__reload__/", include("django_browser_reload.urls")),
+
+    path('news/', include('news.urls')),
+    path('', include('service.urls')),
 ]
 
 

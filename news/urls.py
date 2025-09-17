@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import blog, newDeatils
+from news.views import blog, newDeatils
+
 
 urlpatterns = [
     path('blog/', blog, name='blog'),
