@@ -103,24 +103,24 @@ TAILWIND_APP_NAME = 'theme'
 # -----------------------------
 # Database
 # -----------------------------
-# DATABASES = {
-#     'default': {
-#         'ENGINE': 'django.db.backends.postgresql',
-#         'NAME': 'firstprojectdb',
-#         'USER': 'myuser',        # PostgreSQL username
-#         'PASSWORD': 'postgres',# PostgreSQL password
-#         'HOST': 'localhost',           # Usually 'localhost'
-#         'PORT': '5432',   
-#     }
-    
-# }
-
-
 DATABASES = {
-    "default": dj_database_url.config(
-        default="postgresql://myuser:postgres@localhost:5432/firstprojectdb"
-    )
+    'default': {
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'firstprojectdb',
+        'USER': 'myuser',        # PostgreSQL username
+        'PASSWORD': 'postgres',# PostgreSQL password
+        'HOST': 'localhost',           # Usually 'localhost'
+        'PORT': '5432',   
+    }
+    
 }
+
+
+# DATABASES = {
+#     "default": dj_database_url.config(
+#         default="postgresql://myuser:postgres@localhost:5432/firstprojectdb"
+#     )
+# }
 
 # -----------------------------
 # Password validation
