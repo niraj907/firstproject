@@ -197,6 +197,7 @@ SECRET_KEY = os.environ.get(
 # Turn off debug mode in production
 DEBUG = os.environ.get("DEBUG", "False") == "True"
 
+
 # Hosts allowed to serve your app
 ALLOWED_HOSTS = [
     "127.0.0.1",
