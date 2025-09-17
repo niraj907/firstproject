@@ -202,7 +202,7 @@ DEBUG = os.environ.get("DEBUG", "False") == "True"
 ALLOWED_HOSTS = [
     "127.0.0.1",
     "localhost",
-    "firstproject-1-f58i.onrender.com",
+    "https://djangoproject-wa44.onrender.com",
 ]
 
 # -----------------------------
